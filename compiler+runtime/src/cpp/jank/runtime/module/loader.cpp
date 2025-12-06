@@ -791,10 +791,6 @@ namespace jank::runtime::module
           return find_result{ entry, module_type };
         }
       }
-      else if(entry.cpp.is_some())
-      {
-        return find_result{ entry, module_type::cpp };
-      }
       else if(entry.jank.is_some())
       {
         return find_result{ entry, module_type::jank };
@@ -802,6 +798,10 @@ namespace jank::runtime::module
       else if(entry.cljc.is_some())
       {
         return find_result{ entry, module_type::cljc };
+      }
+      else if(entry.cpp.is_some())
+      {
+        return find_result{ entry, module_type::cpp };
       }
     }
 
