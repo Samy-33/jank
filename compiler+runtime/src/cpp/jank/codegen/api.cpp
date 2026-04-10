@@ -1,5 +1,6 @@
 #include <jank/codegen/api.hpp>
 #include <jank/runtime/context.hpp>
+#include <jank/runtime/core/call.hpp>
 
 jank::runtime::var_ref _jank_var(char const * const sym)
 {
@@ -69,4 +70,17 @@ _jank_closure(jank::runtime::callable_arity_flags const flags, void * const ctx)
 jank::runtime::object_ref _jank_eval_str(char const *edn)
 {
   return jank::runtime::__rt_ctx->eval(jank::runtime::__rt_ctx->forcefully_read_string(edn));
+}
+
+void _jank_refer_global(char const *fully_qualified_sym, char const *renamed_sym)
+{
+  auto const only_sym{ _jank_symbol("", fully_qualified_sym) };
+
+  jank::runtime::dynamic_call(
+    _jank_var("clojure.core/refer-global")->deref(),
+    _jank_keyword("", "only"),
+    jank::runtime::make_box<jank::runtime::obj::persistent_vector>(std::in_place, only_sym),
+    _jank_keyword("", "rename"),
+    jank::runtime::obj::persistent_hash_map::create_unique(
+      std::make_pair(only_sym, _jank_symbol("", renamed_sym))));
 }

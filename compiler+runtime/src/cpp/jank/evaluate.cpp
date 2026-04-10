@@ -740,6 +740,13 @@ namespace jank::evaluate
     return dynamic_call(eval(wrap_expression(expr, "cpp_new", {})));
   }
 
+  object_ref eval(expr::cpp_def_ref const expr)
+  {
+    /* TODO: How do we get source info here? Or can we detect this earlier? */
+    cpp_util::ensure_convertible(expr).expect_ok();
+    return dynamic_call(eval(wrap_expression(expr, "cpp_def", {})));
+  }
+
   object_ref eval(expr::cpp_delete_ref const expr)
   {
     /* TODO: How do we get source info here? Or can we detect this earlier? */

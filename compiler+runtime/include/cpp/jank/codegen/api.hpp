@@ -24,3 +24,4 @@ jank::runtime::obj::jit_function_ref _jank_fn(jank::runtime::callable_arity_flag
 jank::runtime::obj::jit_closure_ref
 _jank_closure(jank::runtime::callable_arity_flags const flags, void * const ctx);
 jank::runtime::object_ref _jank_eval_str(char const *edn);
+void _jank_refer_global(char const *fully_qualified_sym, char const *renamed_sym);

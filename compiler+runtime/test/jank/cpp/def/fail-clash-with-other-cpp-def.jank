@@ -1,0 +1,4 @@
+(cpp/def int foo 5)
+(cpp/def std.string foo "my-string")
+
+:success

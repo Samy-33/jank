@@ -1,0 +1,7 @@
+(cpp/def int my-number 5)
+(cpp/def (std.vector int) my-vec [1 2])
+
+(if (and (= (+ my-number 1) 6)
+         (= my-vec [1 2]))
+  :success
+  (throw :failure))

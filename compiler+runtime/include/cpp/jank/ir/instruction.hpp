@@ -23,6 +23,7 @@ namespace jank::analyze
     using cpp_box_ref = jtl::ref<struct cpp_box>;
     using cpp_unbox_ref = jtl::ref<struct cpp_unbox>;
     using cpp_new_ref = jtl::ref<struct cpp_new>;
+    using cpp_def_ref = jtl::ref<struct cpp_def>;
     using cpp_delete_ref = jtl::ref<struct cpp_delete>;
   }
 }
@@ -76,6 +77,7 @@ namespace jank::ir
     cpp_box,
     cpp_unbox,
     cpp_new,
+    cpp_def,
     cpp_delete
   };
 
@@ -739,6 +741,20 @@ namespace jank::ir
     };
 
     using cpp_new_ref = jtl::ref<cpp_new>;
+
+    struct cpp_def : instruction
+    {
+      cpp_def(identifier const &name,
+              jtl::option<identifier> const &value,
+              analyze::expr::cpp_def_ref const expr);
+
+      void print(jtl::string_builder &sb, usize) const override;
+
+      jtl::option<identifier> value;
+      analyze::expr::cpp_def_ref expr;
+    };
+
+    using cpp_def_ref = jtl::ref<cpp_def>;
 
     struct cpp_delete : instruction
     {

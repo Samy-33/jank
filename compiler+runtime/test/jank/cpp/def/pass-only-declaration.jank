@@ -1,0 +1,5 @@
+(cpp/def std.string foo)
+
+(if (.empty foo)
+  :success
+  (throw :failure))

@@ -1,0 +1,2 @@
+(cpp/def int foo "bar")
+:success
